@@ -8,6 +8,8 @@ library("gplots")
 #DATA LOAD
 V1 <- read.table(file="MultipleRegression2.csv", header = TRUE, sep=",") %>% na.omit(AMG)
 str(V1)
+
+#DEFINING VARIABLES
 v1.Id <- V1[, 1]
 print(v1.Id)
 v1.Class2 <- V1[, 4]
@@ -15,11 +17,13 @@ print(v1.Class2)
 V1.ClassGGO <- V1[, 2]
 print(V1.ClassGGO)
 
-#CHOSE COLOUR PALETTE
+#SCALE DATA
 V1.sc = as.matrix(scale(V1[12:35]))
 
+#CHOOSE COLOUR PALETTE
 my_palette <- colorRampPalette(c("red", "black", "blue"))(n = 1000)
 
+#BUILD SIDEBARS COLOURS 
 color.Id1  <- function(v1.Class2){if(v1.Class2=="Normal") "magenta" 
   else if(v1.Class2=="Rapid") "blue" 
   else if(v1.Class2=="Slow") "limegreen"
@@ -50,14 +54,16 @@ str(MyLabCol)
 col.color.map <- c(rep("yellow", 6),rep("coral1", 6 ), rep("tan3", 6), rep("gray68", 6))
 str(col.color.map)
 
-
+#LET'S GRAPH THE HEATMAP AND DENDROGRAM
 par(xpd=T, mar=par()$mar+c(0,0,0,16))
 
 par(oma=c(0, 0, 0, 0.5), xpd=TRUE)
+                                    
 heatmap.2(V1.sc, scale='none', labRow = v1.Id, trace = 'none', col= my_palette, cexRow = 1.5,
           cexCol=1.5, RowSideColors=sidebarcolors2, labCol=MyLabCol, ColSideColors = col.color.map, 
           keysize=1, key.title= "Color Key", margins = c(8, 8))
 
+#NOW, LOCATE LEGENDS FOR SIDEBARS                             
 legend(locator(1), c("Normal", "Rapid", "Slow", "Sluggish"), cex = 0.8,
        col = c("magenta", "blue", "limegreen", "red"), title="Categories", 
        text.font=0.1, pch = 19, pt.cex = 2, box.lty = 0)
