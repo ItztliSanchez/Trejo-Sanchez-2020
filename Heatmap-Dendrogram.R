@@ -1,4 +1,5 @@
 ####CODE TO REPLY HEAT MAP AND DENDROGRAM COMBINATION#####
+
 #PACKAGE LOAD
 library("ggbiplot")
 library("dplyr")
@@ -20,10 +21,10 @@ print(V1.ClassGGO)
 #SCALE DATA
 V1.sc = as.matrix(scale(V1[12:35]))
 
-#CHOOSE COLOUR PALETTE
+#CHOOSE COLOUR PALETTE FOR HEATMAP
 my_palette <- colorRampPalette(c("red", "black", "blue"))(n = 1000)
 
-#BUILD SIDEBARS COLOURS 
+#BUILD COLOURED SIDEBARS  
 color.Id1  <- function(v1.Class2){if(v1.Class2=="Normal") "magenta" 
   else if(v1.Class2=="Rapid") "blue" 
   else if(v1.Class2=="Slow") "limegreen"
